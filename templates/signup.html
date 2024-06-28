@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Signup - DriveEz</title>
-    <link rel="stylesheet" href="signup-styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='signup-styles.css') }}">
 </head>
 <body>
     <header>
@@ -22,7 +22,7 @@
         <section class="signup-section">
             <div class="signup-container">
                 <h2>Signup</h2>
-                <form>
+                <form  method="post" action="/signup">
                     <label for="name">Name:</label>
                     <input type="text" id="name" name="name" required>
 

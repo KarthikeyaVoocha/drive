@@ -4,7 +4,7 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>DriveEz - Marketplace for Driving Schools</title>
-    <link rel="stylesheet" href="styles.css">
+    <link rel="stylesheet" href="{{ url_for('static', filename='styles.css') }}">
 </head>
 <body>
     <header>
@@ -12,13 +12,13 @@
             <div class="logo">DriveEz</div>
             <ul class="nav-links">
                 <li><a href="#">Home</a></li>
-                <li><a href="login.html">Login</a></li>
+                <li><a href="/login">Login</a></li>
                 <li><a href="#">About Us</a></li>
                 <li><a href="#">Contact Us</a></li>
             </ul>
             <div class="auth-buttons">
-                <button onclick="location.href='login.html'">Login</button>
-                <button onclick="location.href='signup.html'">Sign Up</button>
+                <button onclick="location.href='/login'">Login</button>
+                <button onclick="location.href='/signup'">Sign Up</button>
             </div>
         </nav>
     </header>

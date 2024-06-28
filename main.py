@@ -1,30 +1,32 @@
 import os
-from flask import Flask, render_template, request, redirect, url_for, flash
+from flask import Flask, render_template, request, redirect, url_for, flash, session
 from google.cloud import firestore
 import firebase_admin
 from firebase_admin import credentials, storage
 from werkzeug.utils import secure_filename
+from dotenv import load_dotenv
 
-# Set the path to your service account key
-os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = "./driveez-c669e-firebase-adminsdk-fxpng-8ee74be60d.json"
+# Load environment variables from .env file
+load_dotenv()
 
 app = Flask(__name__)
-app.secret_key = 'your_secret_key'
+app.secret_key = os.getenv('SECRET_KEY')
 app.config['UPLOAD_FOLDER'] = 'uploads'
 app.config['MAX_CONTENT_LENGTH'] = 16 * 1024 * 1024  # 16 MB
+
+# Set the path to your service account key
+os.environ["GOOGLE_APPLICATION_CREDENTIALS"] = os.getenv("GOOGLE_APPLICATION_CREDENTIALS")
 
 # Initialize Firestore DB
 db = firestore.Client()
 
 # Initialize Firebase Admin
-cred = credentials.Certificate("./driveez-c669e-firebase-adminsdk-fxpng-8ee74be60d.json")
+cred = credentials.Certificate(os.getenv("GOOGLE_APPLICATION_CREDENTIALS"))
 firebase_admin.initialize_app(cred, {
-    'storageBucket': 'your-project-id.appspot.com'
+    'storageBucket': os.getenv("STORAGE_BUCKET")
 })
 
 bucket = storage.bucket()
-session=0
-
 @app.route('/')
 def home():
     return render_template('index.html')
